@@ -23,6 +23,10 @@
 - Josh: Add Page (form to add new entries)
 - Emmanuel: About Page
 
-**Note:** CRUD functionality (Create, Read, Update, Delete) 
-was not fully discussed due to time. 
-To be assigned in next meeting (Thursday, 12 March 2026)
+**Note:** CRUD functionality was not fully discussed due to time.
+- Create: Josh (Add Page)
+- Read: Allyssa (Browse Page)
+- Update & Delete: Not yet assigned — 
+  teacher has not covered this topic yet.
+  
+To be discussed in next meeting (Thursday, 12 March 2026)
