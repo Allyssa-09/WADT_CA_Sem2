@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse Destinations - Explore Hub</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- navigation -->
+  <nav>
+    <a href="home.html" class="logo">
+      <img src="icon.JPG" alt="Explore Hub Logo" class="logo-img">
+      Explore Hub
+    </a>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="browse.html" class="active">Browse</a></li>
+      <li><a href="add.html">Add Destination</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="list.html" class="btn-mylist">My List</a></li>
+    </ul>
+  </nav>
+
+  <!-- page title -->
+  <div class="page-title">
+    <h1>Browse Destinations</h1>
+    <p>Curate your personal journey. From the whispering pines of the north to the vibrant markets of the east.</p>
+  </div>
+
+  <!-- filters ( search bar and dropdowns for country and status )-->
+  <div class="filters">
+
+    <!-- search bar -->
+    <input type="text" id="searchInput" placeholder="Search for hidden gems..." oninput="filterCards()">
+
+    <!-- Country dropdown -->
+    <select id="countryFilter" onchange="filterCards()">
+      <option value="">Country</option>
+      <option>Italy</option>
+      <option>Japan</option>
+      <option>Switzerland</option>
+      <option>Greece</option>
+      <option>Canada</option>
+      <option>France</option>
+    </select>
+
+    <!-- Status dropdown -->
+    <select id="statusFilter" onchange="filterCards()">
+      <option value="">Status</option>
+      <option value="visited">Visited</option>
+      <option value="wishlist">Wishlist</option>
+    </select>
+
+  </div>
+
+  <!-- Category tabs -->
+  <div class="category-tabs">
+    <button class="tab active" onclick="setCategory('all', this)">All</button>
+    <button class="tab" onclick="setCategory('beach', this)">Beach</button>
+    <button class="tab" onclick="setCategory('city', this)">City</button>
+    <button class="tab" onclick="setCategory('nature', this)">Nature</button>
+    <button class="tab" onclick="setCategory('culture', this)">Culture</button>
+    <button class="tab" onclick="setCategory('adventure', this)">Adventure</button>
+  </div>
+
+  <!-- result count -->
+  <p class="results-count" id="resultsCount">Showing 6 destinations</p>
+
+  <!-- destination cards  -->
+  <div class="cards-grid" id="cardsGrid">
+
+    <div class="card" data-country="italy" data-status="visited" data-category="beach" data-id="1">
+      <div class="card-image-wrap">
+        <img src="images/positano.jpg" alt="Positano Coast">
+        <span class="badge visited">Visited</span>
+      </div>
+      <div class="card-info">
+        <p class="country">Italy</p>
+        <h3>Positano Coast</h3>
+        <div class="tags">
+          <span>Beach</span>
+          <span>Culture</span>
+        </div>
+        <div class="card-bottom">
+          <p class="date">Added 3 months ago</p>
+          <div class="card-actions">
+            <button class="heart" onclick="toggleHeart(this)">♡</button>
+            <button class="btn-delete" onclick="deleteCard(this)">🗑️ Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-country="japan" data-status="wishlist" data-category="culture" data-id="2">
+      <div class="card-image-wrap">
+        <img src="images/kyoto.jpg" alt="Kyoto Serenity">
+        <span class="badge wishlist">Wishlist</span>
+      </div>
+      <div class="card-info">
+        <p class="country">Japan</p>
+        <h3>Kyoto Serenity</h3>
+        <div class="tags">
+          <span>Culture</span>
+        </div>
+        <div class="card-bottom">
+          <p class="date">Added 1 week ago</p>
+          <div class="card-actions">
+            <button class="heart" onclick="toggleHeart(this)">♡</button>
+            <button class="btn-delete" onclick="deleteCard(this)">🗑️ Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-country="switzerland" data-status="wishlist" data-category="adventure" data-id="3">
+      <div class="card-image-wrap">
+        <img src="images/zermatt.jpg" alt="Zermatt Peaks">
+        <span class="badge wishlist">Wishlist</span>
+      </div>
+      <div class="card-info">
+        <p class="country">Switzerland</p>
+        <h3>Zermatt Peaks</h3>
+        <div class="tags">
+          <span>Nature</span>
+          <span>Adventure</span>
+        </div>
+        <div class="card-bottom">
+          <p class="date">Added today</p>
+          <div class="card-actions">
+            <button class="heart" onclick="toggleHeart(this)">♡</button>
+            <button class="btn-delete" onclick="deleteCard(this)">🗑️ Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-country="greece" data-status="visited" data-category="beach" data-id="4">
+      <div class="card-image-wrap">
+        <img src="images/oia.jpg" alt="Oia Village">
+        <span class="badge visited">Visited</span>
+      </div>
+      <div class="card-info">
+        <p class="country">Greece</p>
+        <h3>Oia Village</h3>
+        <div class="tags">
+          <span>Beach</span>
+        </div>
+        <div class="card-bottom">
+          <p class="date">Added 1 year ago</p>
+          <div class="card-actions">
+            <button class="heart" onclick="toggleHeart(this)">♡</button>
+            <button class="btn-delete" onclick="deleteCard(this)">🗑️ Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-country="canada" data-status="wishlist" data-category="nature" data-id="5">
+      <div class="card-image-wrap">
+        <img src="images/banff.jpg" alt="Banff Springs">
+        <span class="badge wishlist">Wishlist</span>
+      </div>
+      <div class="card-info">
+        <p class="country">Canada</p>
+        <h3>Banff Springs</h3>
+        <div class="tags">
+          <span>Nature</span>
+        </div>
+        <div class="card-bottom">
+          <p class="date">Added 2 weeks ago</p>
+          <div class="card-actions">
+            <button class="heart" onclick="toggleHeart(this)">♡</button>
+            <button class="btn-delete" onclick="deleteCard(this)">🗑️ Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-country="france" data-status="visited" data-category="city" data-id="6">
+      <div class="card-image-wrap">
+        <img src="images/paris.jpg" alt="Parisian Nights">
+        <span class="badge visited">Visited</span>
+      </div>
+      <div class="card-info">
+        <p class="country">France</p>
+        <h3>Parisian Nights</h3>
+        <div class="tags">
+          <span>City</span>
+          <span>Culture</span>
+        </div>
+        <div class="card-bottom">
+          <p class="date">Added 1 year ago</p>
+          <div class="card-actions">
+            <button class="heart" onclick="toggleHeart(this)">♡</button>
+            <button class="btn-delete" onclick="deleteCard(this)">🗑️ Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- discover more button -->
+  <div class="discover-wrap">
+    <button class="btn-discover">Discover More →</button>
+  </div>
+
+  <!-- footer -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <p class="footer-logo">Explore Hub</p>
+        <p class="footer-tagline">Elevating the way we document the world.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Us</a>
+      </div>
+    </div>
+    <p class="footer-copy">© 2026 Explore Hub. All rights reserved.</p>
+  </footer>
+
+  <script src="browse.js"></script>
+
+</body>
+</html>
