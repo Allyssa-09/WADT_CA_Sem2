@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Destination | Explore Hub</title>
+    <link rel="stylesheet" href="add_style.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Navbar -->
+<header class="navbar">
+    <div class="nav-left">
+        <img src="logo.png" alt="Explore Hub Logo" class="logo-img">
+        <span class="logo-text">Explore Hub</span>
+    </div>
+
+    <nav class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Browse</a>
+        <a class="active" href="#">Add Destination</a>
+        <a href="#">About</a>
+    </nav>
+
+    <button class="my-list-btn">My List</button>
+</header>
+
+<!-- Main Content -->
+<main class="container">
+
+    <h1 class="page-title">Add a Destination</h1>
+    <p class="subtitle">Share a place you think others should explore.</p>
+
+    <div class="layout">
+
+        <!-- Form -->
+        <div class="form-box">
+            <form>
+
+                <label>Destination Name</label>
+                <input type="text" placeholder="e.g. Amalfi Coast">
+
+                <label>Country</label>
+                <input type="text" placeholder="e.g. Italy">
+
+                <label>Continent</label>
+                <select>
+                    <option>Europe</option>
+                    <option>Asia</option>
+                    <option>North America</option>
+                    <option>South America</option>
+                    <option>Africa</option>
+                    <option>Oceania</option>
+                    <option>Antarctica</option>
+                </select>
+
+                <label>Category</label>
+                <select>
+                    <option>Coastal</option>
+                    <option>Mountain</option>
+                    <option>Urban</option>
+                    <option>Historical</option>
+                    <option>Wilderness</option>
+                </select>
+
+                <label>Best Season</label>
+                <input type="text" placeholder="e.g. May to September">
+
+                <label>Average Cost</label>
+                <input type="number" placeholder="2500">
+
+                <label>Image URL</label>
+                <input type="url" placeholder="https://example.com/image.jpg">
+
+                <label>Description</label>
+                <textarea rows="5" placeholder="Tell the story of this destination..."></textarea>
+
+                <button type="submit" class="submit-btn">Publish Destination</button>
+            </form>
+        </div>
+
+        <!-- Image + Caption -->
+        <div class="side-box">
+
+            <div class="image-box">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBs0f65sDg5ZoBesxcvST5ZA6yArHX4L721N2S85mUFAkqVom5v18lVB15_LYOgtyxZNjKtweX0-MxBEWozx-B-yl42oL4UuMJolxfxmqT8QWZ9ic2U6I8D_iguwKvaDgqL8MFr9t1fxnImKjIta3dNRYExbymwZ2D0nhC21tYDBUDzSnraN1flSb25jimWeG0LkNn6ju8lMW6dAqSbTtDKF-kJPiyG_efIF3L2rHF3TFb89c--K8wMf1BsrxrJiLoxgH_aoj5EbTw"
+                     alt="Destination preview">
+            </div>
+
+            <div class="quote-box">
+                <p class="quote">
+                    "The real voyage of discovery consists not in seeking new landscapes, but in having new eyes."
+                </p>
+                <p class="author">— Marcel Proust</p>
+            </div>
+
+        </div>
+
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-logo">Explore Hub</div>
+
+    <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Us</a>
+    </div>
+
+    <p class="footer-copy">© 2024 Explore Hub. The Digital Curator.</p>
+</footer>
+
+</body>
+</html>
