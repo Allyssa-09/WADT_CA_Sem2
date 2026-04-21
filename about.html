@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Explore Hub</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --navy: #003554;
+      --light-blue: #71A9F7;
+      --off-white: #F0F7F4;
+      --teal: #2CA58D;
+      --dark-teal: #157A6E;
+      --text-dark: #18313f;
+      --text-light: #5f6f78;
+      --white: #ffffff;
+      --section-bg: #edf3f0;
+      --card-bg: #f7fbf9;
+      --border: #dce6e2;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--off-white);
+      color: var(--text-dark);
+      line-height: 1.5;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    .container {
+      width: 92%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* NAVBAR */
+    header {
+      background: var(--off-white);
+      border-bottom: 1px solid #d9e2de;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-family: "Playfair Display", serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #111;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 0.95rem;
+      color: #66757e;
+    }
+
+    .nav-links a.active {
+      color: var(--dark-teal);
+      border-bottom: 2px solid var(--dark-teal);
+      padding-bottom: 4px;
+    }
+
+    .my-list-btn {
+      background: var(--navy);
+      color: white;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 520px;
+      background:
+        linear-gradient(rgba(0, 53, 84, 0.78), rgba(0, 53, 84, 0.78)),
+        url("images/about-hero.jpg") center/cover no-repeat;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-content {
+      max-width: 620px;
+      color: white;
+      padding: 90px 0;
+    }
+
+    .hero h1 {
+      font-family: "Playfair Display", serif;
+      font-size: 4rem;
+      line-height: 1.1;
+      margin-bottom: 18px;
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
+    }
+
+    .hero p {
+      font-size: 1.6rem;
+      font-weight: 300;
+      line-height: 1.4;
+      color: #dce7ee;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 70px 0;
+    }
+
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-size: 2.5rem;
+      margin-bottom: 14px;
+      color: #1a2a32;
+    }
+
+    .title-line {
+      width: 72px;
+      height: 4px;
+      background: var(--dark-teal);
+      border-radius: 4px;
+      margin-bottom: 48px;
+    }
+
+    /* HOW IT WORKS */
+    .how-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 18px;
+    }
+
+    .feature-card {
+      border-radius: 10px;
+      padding: 28px 26px;
+      min-height: 150px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+    }
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      margin: 14px 0 10px;
+      color: #16242d;
+    }
+
+    .feature-card p {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      max-width: 90%;
+    }
+
+    .feature-card.small {
+      text-align: center;
+      align-items: center;
+    }
+
+    .feature-card.dark {
+      background: #012a43;
+      color: white;
+      border: 1px solid #01223a;
+    }
+
+    .feature-card.dark h3,
+    .feature-card.dark p {
+      color: white;
+    }
+
+    .feature-card.bottom-wide {
+      grid-column: 1 / 2;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .feature-text {
+      max-width: 70%;
+    }
+
+    .icon-box {
+      width: 54px;
+      height: 54px;
+      border-radius: 12px;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--dark-teal);
+      font-size: 1.4rem;
+      font-weight: 700;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+
+    .feature-card.dark .icon-box {
+      background: #053d60;
+      color: #dffff9;
+    }
+
+    /* TEAM */
+    .team-section {
+      background: #eef4f1;
+    }
+
+    .team-top {
+      margin-bottom: 42px;
+      max-width: 680px;
+    }
+
+    .team-top p {
+      color: var(--text-light);
+      font-style: italic;
+      font-size: 1rem;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .team-card img {
+      height: 360px;
+      object-fit: cover;
+      border-radius: 6px;
+      background: #d9e5e1;
+    }
+
+    .team-card h4 {
+      margin-top: 14px;
+      font-size: 1.25rem;
+      color: #111;
+      font-weight: 500;
+    }
+
+    .team-card p {
+      color: var(--dark-teal);
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* CTA */
+    .cta-wrap {
+      padding: 40px 0 80px;
+    }
+
+    .cta-box {
+      max-width: 1000px;
+      margin: 0 auto;
+      border-radius: 14px;
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(0, 53, 84, 0.78), rgba(0, 53, 84, 0.78)),
+        url("images/about-cta.jpg") center/cover no-repeat;
+      text-align: center;
+      padding: 72px 20px;
+    }
+
+    .cta-box h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 3rem;
+      color: white;
+      font-style: italic;
+      margin-bottom: 24px;
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: var(--teal);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .cta-btn:hover {
+      background: var(--dark-teal);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid #d8e2de;
+      padding: 26px 0;
+      background: var(--off-white);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+      color: #6d7b83;
+    }
+
+    .footer-brand {
+      font-family: "Playfair Display", serif;
+      font-style: italic;
+      color: #49575f;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 992px) {
+      .hero h1 {
+        font-size: 3.2rem;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+      }
+
+      .how-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .feature-card.bottom-wide {
+        grid-column: 1 / -1;
+      }
+
+      .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 18px 0;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .hero {
+        min-height: 420px;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .how-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-card.bottom-wide {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .feature-text {
+        max-width: 100%;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-box h2 {
+        font-size: 2rem;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container navbar">
+      <div class="logo">Explore Hub</div>
+
+      <nav class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="browse.html">Browse</a>
+        <a href="add.html">Add Destination</a>
+        <a href="about.html" class="active">About</a>
+      </nav>
+
+      <a href="#" class="my-list-btn">My List</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>About Explore Hub</h1>
+        <p>
+          Helping dreamers and explorers curate their ultimate travel journals.
+          We believe every destination is a story waiting to be told, and we
+          provide the canvas for your journey.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">How it Works</h2>
+      <div class="title-line"></div>
+
+      <div class="how-grid">
+        <div class="feature-card">
+          <div class="icon-box">⤴</div>
+          <h3>Browse destinations</h3>
+          <p>
+            Explore a curated selection of hidden gems and world-famous
+            landmarks from our global community.
+          </p>
+        </div>
+
+        <div class="feature-card small">
+          <div class="icon-box">＋</div>
+          <h3>Add places</h3>
+          <p>Instantly save any location to your personal journal.</p>
+        </div>
+
+        <div class="feature-card small dark">
+          <div class="icon-box">⌁</div>
+          <h3>Track progress</h3>
+          <p>Visualize your journey as you check off destinations around the globe.</p>
+        </div>
+
+        <div class="feature-card bottom-wide">
+          <div class="feature-text">
+            <h3>Manage your list</h3>
+            <p>
+              Organize by priority, season, or travel style. Your bucket list,
+              your rules.
+            </p>
+          </div>
+          <div class="icon-box">☑</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="team-section">
+    <div class="container">
+      <div class="team-top">
+        <h2 class="section-title">Meet the Team</h2>
+        <p>
+          The curators behind your journey. A diverse group of travelers,
+          designers, and thinkers dedicated to the art of discovery.
+        </p>
+      </div>
+
+      <div class="team-grid">
+        <div class="team-card">
+          <img src="imagesallyssa.jpeg" alt="Allyssa">
+          <h4>Allyssa</h4>
+          <p>Founder & Designer</p>
+        </div>
+
+        <div class="team-card">
+          <img src="images/precious.jpg" alt="Precious">
+          <h4>Precious</h4>
+          <p>Lead Developer</p>
+        </div>
+
+        <div class="team-card">
+          <img src="images/josh.jpg" alt="Josh">
+          <h4>Josh</h4>
+          <p>Product Manager</p>
+        </div>
+
+        <div class="team-card">
+          <img src="imagesemmanuel.jpeg" alt="Emmanuel">
+          <h4>Emmanuel</h4>
+          <p>Content Strategist</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-wrap">
+    <div class="container">
+      <div class="cta-box">
+        <h2>Ready to start your next chapter?</h2>
+        <a href="add.html" class="cta-btn">Get Started for Free</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-brand">Explore Hub</div>
+
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Us</a>
+      </div>
+
+      <div>© 2024 Explore Hub. The Curated Journal.</div>
+    </div>
+  </footer>
+
+</body>
+</html>
