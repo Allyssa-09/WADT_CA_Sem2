@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My List | Explore Hub</title>
+    <link rel="stylesheet" href="my-list.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Navbar -->
+<header class="navbar">
+    <div class="nav-left">
+        <img src="logo.png" alt="Explore Hub Logo" class="logo-img">
+        <span class="logo-text">Explore Hub</span>
+    </div>
+
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="browse.html">Browse</a>
+        <a href="add.html">Add Destination</a>
+        <a href="about.html">About</a>
+    </nav>
+
+    <a href="my-list.html">
+        <button class="my-list-btn active-btn">My List</button>
+    </a>
+</header>
+
+<!-- Main Content -->
+<main class="container">
+
+    <h1 class="page-title">My Saved Destinations</h1>
+    <p class="subtitle">View, edit, or remove destinations you've added.</p>
+
+    <div id="list-container" class="list-container">
+        <div class="loading-message">Loading destinations...</div>
+    </div>
+
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-logo">Explore Hub</div>
+
+    <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Us</a>
+    </div>
+
+    <p class="footer-copy">© 2026 Explore Hub. Web UX/UI CA2.</p>
+</footer>
+
+<!-- Supabase + CRUD Logic -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script>
+    const supabaseClient = supabase.createClient(
+        "https://ymrqddgzibnhyubuvqse.supabase.co",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InltcnFkZGd6aWJuaHl1YnV2cXNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY4NTk0MTAsImV4cCI6MjA5MjQzNTQxMH0.kskRBVdFGKDBErcvAaNPWsIpaYoa2Qqokg8M9euL7Yw"
+    );
+
+    async function loadDestinations() {
+        const { data, error } = await supabaseClient
+            .from("destinations")
+            .select("*")
+            .order("id", { ascending: false });
+
+        const container = document.getElementById("list-container");
+        
+        if (error) {
+            container.innerHTML = "<p>Error loading destinations</p>";
+            return;
+        }
+
+        if (!data || data.length === 0) {
+            container.innerHTML = "<p>No destinations saved yet. <a href='add.html'>Add one here</a>.</p>";
+            return;
+        }
+
+        container.innerHTML = "";
+
+        data.forEach(dest => {
+            const item = document.createElement('div');
+            item.className = 'list-item';
+            
+            const costDisplay = dest.avg_cost ? "$" + parseInt(dest.avg_cost).toLocaleString() : "-";
+            
+            item.innerHTML = `
+                <div class="item-picture">
+                    <img src="${dest.image_url || 'https://via.placeholder.com/100x70/157A6E/ffffff?text=No+Image'}" alt="${dest.name}">
+                </div>
+                <div class="item-details">
+                    <h3 class="item-name">${dest.name}</h3>
+                    <p class="item-description">${dest.description || 'No description'}</p>
+                </div>
+                <div class="item-price">${costDisplay}</div>
+                <div class="item-length">${dest.best_season || '-'}</div>
+                <div class="item-category">${dest.category || 'General'}</div>
+                <div class="item-actions">
+                    <button onclick="editDestination(${dest.id}, '${dest.name.replace(/'/g, "\\'")}')" class="edit-btn">Edit</button>
+                    <button onclick="deleteDestination(${dest.id})" class="delete-btn">Delete</button>
+                </div>
+            `;
+            
+            container.appendChild(item);
+        });
+    }
+
+    async function deleteDestination(id) {
+        if (!confirm("Delete this destination?")) return;
+
+        const { error } = await supabaseClient
+            .from("destinations")
+            .delete()
+            .eq("id", id);
+
+        if (error) {
+            alert("Error deleting destination");
+        } else {
+            loadDestinations();
+        }
+    }
+
+    async function editDestination(id, currentName) {
+        const newName = prompt("Enter new name:", currentName);
+        if (!newName || newName === currentName) return;
+
+        const { error } = await supabaseClient
+            .from("destinations")
+            .update({ name: newName })
+            .eq("id", id);
+
+        if (error) {
+            alert("Error updating destination");
+        } else {
+            loadDestinations();
+        }
+    }
+
+    loadDestinations();
+</script>
+
+</body>
+</html>

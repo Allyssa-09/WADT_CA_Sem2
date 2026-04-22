@@ -20,13 +20,15 @@
     </div>
 
     <nav class="nav-links">
-        <a href="#">Home</a>
-        <a href="#">Browse</a>
-        <a class="active" href="#">Add Destination</a>
-        <a href="#">About</a>
+        <a href="index.html">Home</a>
+        <a href="browse.html">Browse</a>
+        <a class="active" href="add.html">Add Destination</a>
+        <a href="about.html">About</a>
     </nav>
 
-    <button class="my-list-btn">My List</button>
+    <a href="my-list.html">
+        <button class="my-list-btn">My List</button>
+    </a>
 </header>
 
 <!-- Main Content -->
@@ -39,16 +41,16 @@
 
         <!-- Form -->
         <div class="form-box">
-            <form>
+            <form id="add-form">
 
                 <label>Destination Name</label>
-                <input type="text" placeholder="e.g. Amalfi Coast">
+                <input id="name" type="text" placeholder="e.g. Amalfi Coast" required>
 
                 <label>Country</label>
-                <input type="text" placeholder="e.g. Italy">
+                <input id="country" type="text" placeholder="e.g. Italy" required>
 
                 <label>Continent</label>
-                <select>
+                <select id="continent">
                     <option>Europe</option>
                     <option>Asia</option>
                     <option>North America</option>
@@ -59,7 +61,7 @@
                 </select>
 
                 <label>Category</label>
-                <select>
+                <select id="category">
                     <option>Coastal</option>
                     <option>Mountain</option>
                     <option>Urban</option>
@@ -68,16 +70,16 @@
                 </select>
 
                 <label>Best Season</label>
-                <input type="text" placeholder="e.g. May to September">
+                <input id="season" type="text" placeholder="e.g. May to September">
 
                 <label>Average Cost</label>
-                <input type="number" placeholder="2500">
+                <input id="cost" type="number" placeholder="2500">
 
                 <label>Image URL</label>
-                <input type="url" placeholder="https://example.com/image.jpg">
+                <input id="image" type="url" placeholder="https://example.com/image.jpg">
 
                 <label>Description</label>
-                <textarea rows="5" placeholder="Tell the story of this destination..."></textarea>
+                <textarea id="description" rows="5" placeholder="Tell the story of this destination..."></textarea>
 
                 <button type="submit" class="submit-btn">Publish Destination</button>
             </form>
@@ -87,8 +89,7 @@
         <div class="side-box">
 
             <div class="image-box">
-                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBs0f65sDg5ZoBesxcvST5ZA6yArHX4L721N2S85mUFAkqVom5v18lVB15_LYOgtyxZNjKtweX0-MxBEWozx-B-yl42oL4UuMJolxfxmqT8QWZ9ic2U6I8D_iguwKvaDgqL8MFr9t1fxnImKjIta3dNRYExbymwZ2D0nhC21tYDBUDzSnraN1flSb25jimWeG0LkNn6ju8lMW6dAqSbTtDKF-kJPiyG_efIF3L2rHF3TFb89c--K8wMf1BsrxrJiLoxgH_aoj5EbTw"
-                     alt="Destination preview">
+                <img src="travel_loc.png" alt="Destination preview">
             </div>
 
             <div class="quote-box">
@@ -113,8 +114,44 @@
         <a href="#">Contact Us</a>
     </div>
 
-    <p class="footer-copy">© 2024 Explore Hub. The Digital Curator.</p>
+    <p class="footer-copy">© 2026 Explore Hub. Web UX/UI CA2.</p>
 </footer>
+
+<!-- Supabase + Insert Logic -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script>
+    const supabaseClient = supabase.createClient(
+        "https://ymrqddgzibnhyubuvqse.supabase.co",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InltcnFkZGd6aWJuaHl1YnV2cXNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY4NTk0MTAsImV4cCI6MjA5MjQzNTQxMH0.kskRBVdFGKDBErcvAaNPWsIpaYoa2Qqokg8M9euL7Yw"
+    );
+
+    document.getElementById("add-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const destination = {
+            name: document.getElementById("name").value,
+            country: document.getElementById("country").value,
+            continent: document.getElementById("continent").value,
+            category: document.getElementById("category").value,
+            best_season: document.getElementById("season").value,
+            avg_cost: document.getElementById("cost").value,
+            image_url: document.getElementById("image").value,
+            description: document.getElementById("description").value
+        };
+
+        const { error } = await supabaseClient
+            .from("destinations")
+            .insert([destination]);
+
+        if (error) {
+            alert("Error adding destination");
+            console.log(error);
+        } else {
+            alert("Destination added successfully!");
+            e.target.reset();
+        }
+    });
+</script>
 
 </body>
 </html>
